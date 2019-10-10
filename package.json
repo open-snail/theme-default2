@@ -13,7 +13,10 @@
   "dependencies": {
     "nuxt": "^2.0.0",
     "element-ui": "^2.4.11",
-    "@nuxtjs/axios": "^5.3.6"
+    "@nuxtjs/axios": "^5.3.6",
+    "highlight.js": "^9.15.6",
+    "js-cookie": "2.2.0",
+    "marked": "^0.7.0"
   },
   "devDependencies": {
     "eslint-config-prettier": "^4.1.0",
