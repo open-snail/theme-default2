@@ -1,6 +1,6 @@
 # theme-default2
 
-> My exquisite Nuxt.js project
+> 一个Nuxt.js的博客
 
 ## Build Setup
 
