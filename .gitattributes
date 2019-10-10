@@ -1,0 +1,3 @@
+*.js linguist-language=nuxt.js,vue.js
+*.css linguist-language=nuxt.js,vue.js
+*.html linguist-language=nuxt.js,vue.js
