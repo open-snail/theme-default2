@@ -23,7 +23,16 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['element-ui/lib/theme-chalk/index.css'],
+  css: [
+    // 直接加载一个 Node.js 模块。（在这里它是一个 Sass 文件）
+    // 项目里要用的 CSS 文件
+    // '@/assets/css/main.css',
+    // // 项目里要使用的 SCSS 文件
+    // '@/assets/css/main.scss',
+    'element-ui/lib/theme-chalk/index.css',
+    // 'reset.css',
+    '@/static/css/reset.css'
+  ],
   /*
    ** Plugins to load before mounting the App
    */

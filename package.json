@@ -11,16 +11,19 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "nuxt": "^2.0.0",
-    "element-ui": "^2.4.11",
     "@nuxtjs/axios": "^5.3.6",
+    "element-ui": "^2.4.11",
     "highlight.js": "^9.15.6",
     "js-cookie": "2.2.0",
-    "marked": "^0.7.0"
+    "marked": "^0.7.0",
+    "nuxt": "^2.0.0",
+    "reset.css": "^2.0.2"
   },
   "devDependencies": {
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-prettier": "^3.0.1",
-    "prettier": "^1.16.4"
+    "node-sass": "^4.12.0",
+    "prettier": "^1.16.4",
+    "sass-loader": "^8.0.0"
   }
 }
