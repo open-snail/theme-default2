@@ -31,7 +31,9 @@ export default {
     // '@/assets/css/main.scss',
     'element-ui/lib/theme-chalk/index.css',
     // 'reset.css',
-    '@/static/css/reset.css'
+    '@/static/css/reset.css',
+
+    '@/assets/iconfont/iconfont.css'
   ],
   /*
    ** Plugins to load before mounting the App
@@ -57,7 +59,22 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    axios: {
+      proxy: true,
+      progress: false
+      // See https://github.com/nuxt-community/axios-module#options
+    },
+    proxy: [
+      [
+        '/api/blog',
+        {
+          target: 'http://helloblog.byteblogs.com/api/blog', // api主机
+          pathRewrite: { '^/api/blog' : '/' }
+        }
+      ]
+    ],
+  },
   /*
    ** Build configuration
    */

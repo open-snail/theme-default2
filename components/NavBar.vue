@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="avatar">
-      <el-avatar :size="300" />
+      <el-avatar :size="150" />
       <span class="name">Name</span>
     </div>
   </div>

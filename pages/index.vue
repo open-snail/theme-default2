@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    <el-row :gutter="20">
+    <el-row :gutter="20" type="flex" align="middle">
       <el-col :span="14" :offset="7">
         <div>
           <span>标签a</span>
@@ -11,9 +11,7 @@
             placeholder="请输入内容"
             style=" width: 200px;margin-left: 400px"
           />
-          <span>标签a</span>
-          <span>标签a</span>
-          <span>标签a</span>
+          <i class="iconfont icon-github" style="font-size: 28px;text-align: center"></i>
         </div>
       </el-col>
     </el-row>
@@ -22,16 +20,18 @@
         <h1 class="item-title">{{item.title}}</h1>
         <div class="item-content">{{item.content}}</div>
        <div class="icon">
-         <span>star</span>
-         <span>user</span>
+         <i class="iconfont icon-eye"></i>
+         <span style="margin-right: 15px">23</span>
+         <i class="iconfont icon-pinglun"></i>
+         <span>10</span>
        </div>
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
+  import api from '~/api/index.js';
 export default {
   data() {
     return {
@@ -40,6 +40,9 @@ export default {
         { title: '标题', content: '我是内容' }
       ]
     }
+  },
+  async asyncData({ app, store, params }) {
+    await api.test("/api/blog/auth/master/v1/get")
   },
   components: {}
 }
