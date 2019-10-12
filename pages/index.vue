@@ -31,7 +31,7 @@
 </template>
 
 <script>
-  import api from '~/api/index.js';
+  import { fetchArticle, fetchLinkList } from '~/api/index'
 export default {
   data() {
     return {
@@ -42,7 +42,8 @@ export default {
     }
   },
   async asyncData({ app, store, params }) {
-    await api.test("/api/blog/auth/master/v1/get")
+    // await fetchArticle(app.$axios.request, 12)
+    await fetchLinkList(app.$axios.request)
   },
   components: {}
 }

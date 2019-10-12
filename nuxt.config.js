@@ -42,7 +42,7 @@ export default {
     '@/plugins/element-ui',
     { src: '~plugins/highlight.js' },
     { src: '~plugins/auth.js', ssr: false },
-    '~/plugins/axios'
+    { src: "~/plugins/axios.js" },
   ],
   /*
    ** Nuxt.js dev-modules
@@ -53,28 +53,27 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    axios: {
-      proxy: true,
-      progress: false
-      // See https://github.com/nuxt-community/axios-module#options
-    },
-    proxy: [
-      [
-        '/api/blog',
-        {
-          target: 'http://helloblog.byteblogs.com/api/blog', // api主机
-          pathRewrite: { '^/api/blog' : '/' }
-        }
-      ]
-    ],
+    proxy: true,
+    progress: false
+    // See https://github.com/nuxt-community/axios-module#options
   },
+  proxy: [
+    [
+      '/api/blog',
+      {
+        target: `http://helloblog.byteblogs.com/api/blog/`, // api主机
+        pathRewrite: { '^/api/blog': '/' }
+      }
+    ]
+  ],
   /*
    ** Build configuration
    */

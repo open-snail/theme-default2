@@ -23,7 +23,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import { test } from '~/api'
+import { fetchArticle, fetchLinkList } from '~/api/index'
 export default {
   computed: {
     todos() {
@@ -37,20 +37,9 @@ export default {
   },
   methods: {
     getClickMe() {
-      let url =
-        'https://www.easy-mock.com/mock/5d6ba32fdcdabb3a15a55996/miao/hotmovie'
-      test(url).then(data => {
-        console.log(data)
-      })
     },
     clickMe() {
-      this.$axios
-        .get(
-          'https://www.easy-mock.com/mock/5d6ba32fdcdabb3a15a55996/miao/hotmovie'
-        )
-        .then(data => {
-          console.log(data)
-        })
+      fetchLinkList(this.$axios.$request)
     },
     addTodo(e) {
       this.$store.commit('todos/add', this.input)

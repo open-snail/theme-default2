@@ -1,7 +1,4 @@
-import axios from 'axios'
 import { Message, Loading } from 'element-ui'
-// 初始地址
-let loadingInstance = null
 
 export default function ({ $axios, redirect }) {
   // 基本配置
@@ -11,7 +8,8 @@ export default function ({ $axios, redirect }) {
   $axios.defaults.headers.delete['Content-Type'] = 'application/x-www-form-urlencoded'
 
   $axios.onRequest(config => {
-    Message.success("aaaa")
+    // console.log(config)
+    // Message.success("aaaa")
   })
 
   $axios.onResponse(response => {
@@ -32,31 +30,3 @@ export default function ({ $axios, redirect }) {
 }
 
 
-
-// 封装get请求
-export const get = (url, params, config = {}) => {
-  return new Promise((resolve, reject) => {
-    instance({
-      method: 'get',
-      url,
-      params,
-      ...config
-    })
-      .then(response => resolve(response))
-      .catch(error => reject(error))
-  })
-}
-
-// 封装post请求
-export const post = (url, data, config = {}) => {
-  return new Promise((resolve, reject) => {
-    instance({
-      method: 'post',
-      url,
-      data,
-      ...config
-    })
-      .then(response => resolve(response))
-      .then(error => reject(error))
-  })
-}
