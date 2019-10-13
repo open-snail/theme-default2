@@ -16,34 +16,41 @@
       </el-col>
     </el-row>
     <div class="body">
-      <div class="item" v-for="(item,index) in itemList" :key="index">
+      <div class="item" v-for="(item,index) in itemList" :key="index" @click="toDetailClick(item)">
         <h1 class="item-title">{{item.title}}</h1>
         <div class="item-content">{{item.content}}</div>
-       <div class="icon">
-         <i class="iconfont icon-eye"></i>
-         <span style="margin-right: 15px">23</span>
-         <i class="iconfont icon-pinglun"></i>
-         <span>10</span>
-       </div>
+        <div class="icon">
+          <i class="iconfont icon-eye"></i>
+          <span style="margin-right: 15px">23</span>
+          <i class="iconfont icon-pinglun"></i>
+          <span>10</span>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import { fetchArticle, fetchLinkList } from '~/api/index'
+import { fetchArticle, fetchLinkList } from '~/api/index'
+
 export default {
   data() {
     return {
       itemList: [
-        { title: '标题', content: '我是内容' },
-        { title: '标题', content: '我是内容' }
+        { id: '1', title: '标题', content: '我是内容' },
+        { id: '2', title: '标题', content: '我是内容' }
       ]
     }
   },
   async asyncData({ app, store, params }) {
     // await fetchArticle(app.$axios.request, 12)
     await fetchLinkList(app.$axios.request)
+  },
+  methods: {
+    toDetailClick(item) {
+      console.log(item)
+      this.$router.push({ name: 'detail-id', query: { id: item.id } })
+    }
   },
   components: {}
 }
@@ -78,7 +85,8 @@ export default {
   .item-content {
     padding-left: 40px;
   }
-  .icon{
+
+  .icon {
     padding-top: 20px;
     padding-left: 40px;
 
