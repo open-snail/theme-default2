@@ -3,17 +3,17 @@
     <div class="body">
       <div
         class="item"
-        v-for="(item, index) in itemList"
+        v-for="(item, index) in list"
         :key="index"
         @click="toDetailClick(item)"
       >
         <h1 class="item-title">{{ item.title }}</h1>
-        <div class="item-content">{{ item.content }}</div>
+        <div class="item-content">{{ item.summary }}</div>
         <div class="icon">
           <i class="iconfont icon-eye"></i>
-          <span style="margin-right: 15px">23</span>
+          <span style="margin-right: 15px">{{item.views}}</span>
           <i class="iconfont icon-pinglun"></i>
-          <span>10</span>
+          <span>{{item.comments}}</span>
         </div>
       </div>
     </div>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { fetchArticle, fetchLinkList } from '~/api/index'
+import {  fetchArticleList } from '~/api/index'
 
 export default {
   data() {
@@ -33,8 +33,10 @@ export default {
     }
   },
   async asyncData({ app, store, params }) {
-    // await fetchArticle(app.$axios.request, 12)
-    await fetchLinkList(app.$axios.request)
+    let {models, pageInfo} = await fetchArticleList(app.$axios.$request,{page:1,size:5})
+    return {
+      list: models
+    }
   },
   methods: {
     toDetailClick(item) {
