@@ -1,6 +1,5 @@
 <template>
-  <div>
-
+  <div class="layout">
     <nav-bar class="header"></nav-bar>
     <div class="body">
       <nuxt/>
@@ -16,16 +15,19 @@ export default {
   }
 }
 </script>
-<style>
-  @import '../static/css/reset.css';
+<style lang="scss">
+  .layout {
+    .header {
+      height: 300px;
+    }
+    .body {
+      width: 1200px;
+      margin: 0 auto;
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-items: center;
+    }
+  }
 
-  .header {
-    height: 500px;
-  }
-  .body {
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-  }
 </style>

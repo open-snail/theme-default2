@@ -1,6 +1,7 @@
 import { Message, Loading } from 'element-ui'
 
-export default function ({ $axios, redirect }) {
+export default function({ $axios, redirect }) {
+
   // 基本配置
   $axios.defaults.timeout = 10000
   $axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
@@ -8,8 +9,7 @@ export default function ({ $axios, redirect }) {
   $axios.defaults.headers.delete['Content-Type'] = 'application/x-www-form-urlencoded'
 
   $axios.onRequest(config => {
-    // console.log(config)
-    // Message.success("aaaa")
+
   })
 
   $axios.onResponse(response => {
@@ -17,15 +17,16 @@ export default function ({ $axios, redirect }) {
   })
 
   $axios.onError(error => {
-    console.log("error --->" +error)
+    loadingInstance.close()
+    console.log('error --->' + error)
     const code = parseInt(error.response && error.response.status)
   })
 
-  $axios.onRequestError(err =>{
-    console.log("onRequestError --->" +err)
+  $axios.onRequestError(err => {
+    console.log('onRequestError --->' + err)
   })
-  $axios.onResponseError(err =>{
-    console.log("onResponseError --->" +err)
+  $axios.onResponseError(err => {
+    console.log('onResponseError --->' + err)
   })
 }
 

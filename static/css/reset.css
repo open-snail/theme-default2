@@ -13,6 +13,10 @@ html {
   /* 1 */
   -webkit-text-size-adjust: 100%;
   /* 2 */
+  /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
+  -ms-overflow-style:none;
+  /*火狐下隐藏滚动条*/
+  overflow:-moz-scrollbars-none;
 }
 
 /* Sections
@@ -377,4 +381,8 @@ template {
 
 [hidden] {
   display: none;
+}
+
+::-webkit-scrollbar{
+  display:none;
 }

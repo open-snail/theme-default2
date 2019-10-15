@@ -17,11 +17,19 @@
         </div>
       </div>
     </div>
+    <!--    分页-->
+    <el-pagination
+      class="pagination"
+      @current-change="pageChange"
+      layout="prev,pager,next"
+      :page-size="page.size"
+      :total="page.total"
+    ></el-pagination>
   </div>
 </template>
 
 <script>
-import {  fetchArticleList } from '~/api/index'
+import { fetchArticleList } from '~/api/index'
 
 export default {
   data() {
@@ -29,16 +37,23 @@ export default {
       itemList: [
         { id: '1', title: '标题', content: '我是内容' },
         { id: '2', title: '标题', content: '我是内容' }
-      ]
+      ],
+      page: { name: 1 }
     }
   },
   async asyncData({ app, store, params }) {
-    let {models, pageInfo} = await fetchArticleList(app.$axios.$request,{page:1,size:5})
+    let { models, pageInfo } = await fetchArticleList(app.$axios.$request, { page: 1, size: 5 })
     return {
-      list: models
+      list: models,
+      page: pageInfo
     }
   },
   methods: {
+    async pageChange(val) {
+      let { models, pageInfo } = await fetchArticleList(this.$axios.$request, { page: val, size: 5 })
+      this.page = pageInfo
+      this.list = models
+    },
     toDetailClick(item) {
       console.log(item)
       this.$router.push({ name: 'detail-id', query: { id: item.id } })
@@ -51,33 +66,39 @@ export default {
 <style scoped>
 
 
-.body {
-  padding-top: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
-}
+  .body {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+  }
 
-.item {
-  display: inline;
-  margin: 10px auto;
-  padding: 10px auto;
-  width: 1000px;
-  height: 250px;
-  border-radius: 20px;
-  background-color: rgb(223, 223, 223);
-}
+  .item {
+    cursor: pointer;
+    display: inline;
+    margin: 10px auto;
+    padding: 10px auto;
+    width: 1000px;
+    height: 250px;
+    border-radius: 20px;
+    background-color: rgb(223, 223, 223);
+  }
 
-.item-title {
-  padding: 40px;
-}
+  .item-title {
+    padding: 40px;
+  }
 
-.item-content {
-  padding-left: 40px;
-}
+  .item-content {
+    padding-left: 40px;
+  }
 
-.icon {
-  padding-top: 20px;
-  padding-left: 40px;
-}
+  .icon {
+    padding-top: 20px;
+    padding-left: 40px;
+  }
+
+  .pagination {
+    width: 300px;
+    margin: 0 auto;
+  }
 </style>

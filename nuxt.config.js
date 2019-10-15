@@ -30,9 +30,8 @@ export default {
     // // 项目里要使用的 SCSS 文件
     // '@/assets/css/main.scss',
     'element-ui/lib/theme-chalk/index.css',
-    // 'reset.css',
+    'reset.css',
     '@/static/css/reset.css',
-
     '@/assets/iconfont/iconfont.css'
   ],
   /*

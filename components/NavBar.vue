@@ -71,14 +71,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  /*.div /deep/.el-input {*/
-  /*  border-radius: 15px;*/
-  /*  background-color: rgba(0, 0, 0, 1);*/
-  /*}*/
   .headers {
+    padding: 0;
+    margin: 0;
     background-image: url('~assets/images/logo.jpg');
     position: relative;
-    height: 500px;
+    height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -101,17 +99,20 @@ export default {
       justify-content: space-between;
 
       .tab-item {
-        color: rgb(223, 223, 223);
 
         .tab {
           font-size: 20px;
           padding: 5px;
         }
+        .tab:hover{
+          color: black;
+
+        }
       }
 
       .active {
-        border-bottom: 4px solid black;
-        border-bottom-width: 5px;
+        /*border-bottom: 4px solid black;*/
+        /*border-bottom-width: 5px;*/
       }
     }
   }
