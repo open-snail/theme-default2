@@ -37,9 +37,9 @@ export function fetchCategoryList(request, query) {
   })
 }
 
-export function fetchArchiveTotalByDateList(request, query) {
+export function fetchArchiveGroupYearList(request, query) {
   return request({
-    url: '/api/blog/posts/archive/v1/list',
+    url: '/api/blog/archive/year/v1/list',
     method: 'get',
     params: query
   })

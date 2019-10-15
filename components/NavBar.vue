@@ -2,8 +2,8 @@
   <div>
     <div class="headers">
       <div class="avatar">
-        <el-avatar :size="150"/>
-        <span class="name">Name</span>
+        <el-avatar :size="150" :src="masterUserInfo.avatar"/>
+        <span class="name">{{masterUserInfo.name}}</span>
       </div>
     </div>
     <el-row :gutter="20" type="flex" align="middle" class="header-tab">
@@ -43,11 +43,12 @@ export default {
   data() {
     return {
       curIndex: 0,
-      tabs: ['首页', '标签', '归档', '关于']
+      tabs: ['首页', '标签', '归档', '关于','友情链接'],
+      masterUserInfo: this.$store.state.masterUserInfo
     }
   }, methods: {
     friendlyClick() {
-      this.$router.push({ name: 'friend' })
+     window.location.href= this.masterUserInfo.htmlUrl
     },
     changeTabClick(item) {
       const exeFn = {
@@ -62,6 +63,9 @@ export default {
         },
         '关于': () => {
           this.$router.push({ name: 'about' })
+        },
+        '友情链接': () => {
+          this.$router.push({ name: 'friend' })
         }
       }
       exeFn[item]()
