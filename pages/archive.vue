@@ -1,25 +1,61 @@
 <template>
-  <div class="archive">
-    <div class="title">归档</div>
-    <ul>
-      <li v-for="item in list" :key="item.id" class="content">
-        <span> {{ item.title }}</span>
-        <span>{{ item.time }}</span>
-      </li>
-    </ul>
+  <div>
+    <div  class="archive" v-for="item in list">
+      <div class="title">{{ item.year }}</div>
+      <ul>
+        <li class="content" v-for="item1 in item.data">
+          <span> {{ item1.title }}</span>
+          <span>{{ getLastDate(item1.createTime) }}</span>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
-import { fetchArchiveTotalByDateList, fetchConfigList } from '~/api/index'
+import { fetchArchiveGroupYearList } from '~/api/index'
 export default {
   name: 'archive',
   async asyncData({ app, store, params }) {
-    let result = await fetchArchiveTotalByDateList(app.$axios.$request)
+    let result = await fetchArchiveGroupYearList(app.$axios.$request)
+
+      let map = {},
+          dest = [];
+      result.models.forEach(item =>{
+          if(!map[item.year]){
+              let arr = new Array();
+              arr.push(item)
+              dest.push({
+                  year: item.year,
+                  data: [item]
+              });
+              map[item.year] = item.year;
+          }else{
+              for(let j = 0; j < dest.length; j++){
+                  let dj = dest[j];
+                  if(dj.year === item.year){
+                      dj.data.push(item);
+                      break;
+                  }
+              }
+          }
+      })
+
     return {
-      list: result.models
+      list: dest
     }
-  }
+  },
+   methods: {
+        getLastDate: function(time) {
+            const date = new Date(time);
+            const month =
+                date.getMonth() + 1 < 10
+                    ? "0" + (date.getMonth() + 1)
+                    : date.getMonth() + 1;
+            const day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            return date.getFullYear() + "-" + month + "-" + day;
+        },
+    }
 }
 </script>
 
