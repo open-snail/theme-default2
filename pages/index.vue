@@ -5,16 +5,17 @@
         class="item"
         v-for="(item, index) in list"
         :key="index"
-        @click="toDetailClick(item)"
       >
-        <h1 class="item-title">{{ item.title }}</h1>
-        <div class="item-content">{{ item.summary }}</div>
-        <div class="icon">
-          <i class="iconfont icon-eye"></i>
-          <span style="margin-right: 15px">{{item.views}}</span>
-          <i class="iconfont icon-pinglun"></i>
-          <span>{{item.comments}}</span>
-        </div>
+        <NuxtLink :to="'/detail/'+ item.id">
+          <h1 class="item-title">{{ item.title }}</h1>
+          <div class="item-content">{{ item.summary }}</div>
+          <div class="icon">
+            <i class="iconfont icon-eye"></i>
+            <span style="margin-right: 15px">{{item.views}}</span>
+            <i class="iconfont icon-pinglun"></i>
+            <span>{{item.comments}}</span>
+          </div>
+        </NuxtLink>
       </div>
     </div>
     <!--    分页-->
@@ -53,10 +54,6 @@ export default {
       let { models, pageInfo } = await fetchArticleList(this.$axios.$request, { page: val, size: 5 })
       this.page = pageInfo
       this.list = models
-    },
-    toDetailClick(item) {
-      console.log(item)
-      this.$router.push({ name: 'detail-id', query: { id: item.id } })
     }
   },
   components: {}

@@ -32,6 +32,7 @@ export default {
     'element-ui/lib/theme-chalk/index.css',
     'reset.css',
     '@/static/css/reset.css',
+    '@/static/css/github-markdown.css',
     '@/assets/iconfont/iconfont.css'
   ],
   /*

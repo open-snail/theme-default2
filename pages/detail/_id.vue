@@ -1,11 +1,11 @@
 <template>
   <div class="blog-detail">
-    <h2>{{detail.title}}</h2>
+    <h1>{{detail.title}}</h1>
     <div class="blog-desc">
      <span class="left">
-        {{detail.time}}
+        {{getLastDate(detail.createTime)}}
       <span>|</span>
-      <span>阅读:{{detail.time}}次</span>
+      <span>阅读:{{detail.views}}次</span>
      </span>
       <span class="right">
         <span v-for="(item,index) in detail.tag" :key="index">
@@ -13,8 +13,7 @@
         </span>
       </span>
     </div>
-    <div class="blog-content">
-      {{detail.content}}
+    <div class="blog-content markdown-body" v-html="content">
     </div>
     <div class="comment">
       <div class="comment-desc">
@@ -29,7 +28,7 @@
           <div class="comment-right-name">
             {{item.name}}
           </div>
-          <div class="comment-right-content">
+          <div class="comment-right-content" >
             {{item.content}}
           </div>
           <div class="comment-right-time">
@@ -58,39 +57,108 @@
 </template>
 
 <script>
+    import { fetchArticle, savePostsComments, getPostsCommentsList  } from '~/api/index'
+    import highlight from '~/plugins/highlight'
 export default {
-  name: '_id',
-  data() {
-    return {
-      replyValue: '',
-      detail: {
-        title: '经过几天努力终于开源了一个前后分离的vue + springboot的个人博客',
-        time: '2016-12-02',
-        readTime: 2251,
-        tag: ['java', 'springBoot'],
-        content: '为什么会开发这个个人博客？说到为什么会开发这个个人博客，愿意在上半年写了一个多人博客，byteblogs 但是总感觉缺少点什么，最后考虑一下准备写一个个人博客让个人博客的文章可以同步发到byteblogs上去，这个就形成一个圈子。只说不练假把式，于是就开工搞起了。我看了很多的个人博客大都是java + freemaker ，这个做主题是比较好更换的，但是局限性很大，不利于二次开发，而是改一下前端都需要整个重启费时费力。于是我就干脆直接搞个前后分离的博客。',
-        comment: [
-          {
-            id: '1',
-            name: 'byteblogs',
-            content: '写不不错学习了',
-            time: '2018-03-09',
-            avatar: 'https://www.baidu.com/img/bd_logo1.png?where=super'
-          },
-          {
-            id: '2',
-            name: 'byteblogs',
-            content: '写不不错学习了',
-            time: '2018-03-09',
-            avatar: 'https://www.baidu.com/img/bd_logo1.png?where=super'
-          }
-        ],
-        commentTime: 500
-      }
-    }
-  },
+  name: '',
+   async asyncData({ app, store, params }) {
+       let { model } = await fetchArticle(app.$axios.$request, params.id)
+       let content = highlight(model.content)
+       console.log(model)
+        return {
+            detail: model,
+            content: content
+        }
+   },
+    methods: {
+        getLastDate: function(time) {
+            const date = new Date(time);
+            const month =
+                date.getMonth() + 1 < 10
+                    ? "0" + (date.getMonth() + 1)
+                    : date.getMonth() + 1;
+            const day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            return date.getFullYear() + "-" + month + "-" + day;
+        },
+            login() {
+                const token = this.$store.state.token;
+                if (token === null || token === undefined) {
+                    this.$router.push("/login");
+                }
+            },
+            savePostsComments() {
+                if (this.content === "") {
+                    this.$message({
+                        message: "内容不能为空",
+                        type: "error",
+                        showClose: true,
+                        duration: 1000
+                    });
+                    return;
+                }
+
+                let json = {
+                    content: this.content,
+                    postsId: this.postsId
+                };
+
+                if (this.isReply) {
+                    let content = this.content.replace(this.preContent, "");
+                    if (this.content.indexOf(this.preContent, 0) !== -1) {
+                        json["parentId"] = this.parentId;
+                        json["content"] = content;
+                    }
+                    console.log(json);
+                    console.log(this.content.indexOf(this.preContent, 0));
+                }
+
+                savePostsComments(json).then(res => {
+                    console.log(res);
+                    this.$message({
+                        message: "评论成功",
+                        type: "success",
+                        showClose: true,
+                        duration: 1000
+                    });
+
+                    this.getPostsCommentsList();
+                    this.content = "";
+                });
+            },
+            getPostsCommentsList(page) {
+                getPostsCommentsList({
+                    postsId: this.postsId,
+                    page: page === undefined ? 1 : page,
+                    size: 5
+                }).then(res => {
+                    console.log(res);
+                    const { success, models, pageInfo } = res;
+                    if (success === 1) {
+                        this.list = models;
+                        this.listQuery = pageInfo;
+                    }
+                });
+            },
+            reply(item) {
+                this.preContent = "@" + item.authorName + ":";
+                this.content = this.preContent;
+                this.isReply = true;
+                this.parentId = item.id;
+            },
+            prevPage(item) {
+                console.log(item);
+                this.getPostsCommentsList(item);
+            },
+            nextPage(item) {
+                console.log(item);
+                this.getPostsCommentsList(item);
+            },
+            currentPage(item) {
+                console.log(item);
+                this.getPostsCommentsList(item);
+            }
+    },
   mounted() {
-    console.log(this.$route.query.id)
   }
 }
 </script>
