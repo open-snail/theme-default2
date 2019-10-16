@@ -58,7 +58,7 @@
       </el-pagination>
     </div>
     <div class="reply">
-      <el-avatar :size="50" class="reply-avatar" :src="userInfo.avatar"></el-avatar>
+      <el-avatar :size="50" class="reply-avatar"  :src="userInfo !== null ? userInfo.avatar : masterUserInfo.avatar"></el-avatar>
       <el-input
         style="width: 800px"
         type="textarea"
@@ -94,7 +94,8 @@ export default {
     },
     computed: {
         ...mapState({
-            userInfo: state => state.userInfo
+            userInfo: state => state.userInfo,
+            masterUserInfo: state => state.masterUserInfo
         })
     },
    async asyncData({ app, store, params }) {
@@ -111,8 +112,9 @@ export default {
        model.tagsList.forEach((value, index, array) => {
            keywords = keywords + value.name +","
        })
+
        app.head.meta = [
-           { hid: 'description', name: 'description', content: model.summary||"" },
+           { hid: 'description', name: 'description', content: model.summary|| "" },
            { hid: 'keywords', name: 'keywords', content: keywords }
        ]
 
