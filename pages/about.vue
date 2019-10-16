@@ -1,7 +1,7 @@
 <template>
   <div class="about">
-    <div class="about-title"> {{about.title}}</div>
-    <div class="about-content"> {{about.content}}</div>
+    <div class="about-title">{{ about.title }}</div>
+    <div class="about-content">{{ about.content }}</div>
   </div>
 </template>
 
@@ -14,34 +14,33 @@ export default {
     }
   },
   async asyncData({ app, store, params }) {
-      return {
-          title: "关于我"+ "-" + store.state.config.name
-      }
-   },
-    head () {
-        return {
-            title: this.title,
-        }
+    return {
+      title: '关于我' + '-' + store.state.config.name
     }
+  },
+  head() {
+    return {
+      title: this.title
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
-  .about {
-    width: 1000px;
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    justify-items: center;
+.about {
+  width: 1000px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  justify-items: center;
 
-    .about-title {
-      padding: 10px;
-    }
-
-    .about-content {
-      padding: 10px;
-
-    }
+  .about-title {
+    padding: 10px;
   }
+
+  .about-content {
+    padding: 10px;
+  }
+}
 </style>

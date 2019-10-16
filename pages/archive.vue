@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div  class="archive" v-for="item in list">
+    <div class="archive" v-for="item in list">
       <div class="title">{{ item.year }}</div>
       <ul>
         <li class="content" v-for="item1 in item.data">
@@ -19,49 +19,49 @@ export default {
   async asyncData({ app, store, params }) {
     let result = await fetchArchiveGroupYearList(app.$axios.$request)
 
-      let map = {},
-          dest = [];
-      result.models.forEach(item =>{
-          if(!map[item.year]){
-              let arr = new Array();
-              arr.push(item)
-              dest.push({
-                  year: item.year,
-                  data: [item]
-              });
-              map[item.year] = item.year;
-          }else{
-              for(let j = 0; j < dest.length; j++){
-                  let dj = dest[j];
-                  if(dj.year === item.year){
-                      dj.data.push(item);
-                      break;
-                  }
-              }
+    let map = {},
+      dest = []
+    result.models.forEach(item => {
+      if (!map[item.year]) {
+        let arr = new Array()
+        arr.push(item)
+        dest.push({
+          year: item.year,
+          data: [item]
+        })
+        map[item.year] = item.year
+      } else {
+        for (let j = 0; j < dest.length; j++) {
+          let dj = dest[j]
+          if (dj.year === item.year) {
+            dj.data.push(item)
+            break
           }
-      })
+        }
+      }
+    })
 
     return {
       list: dest,
-        title: "归档" + "-" + store.state.config.name
+      title: '归档' + '-' + store.state.config.name
     }
   },
-    head () {
-        return {
-            title: this.title,
-        }
-    },
-   methods: {
-        getLastDate: function(time) {
-            const date = new Date(time);
-            const month =
-                date.getMonth() + 1 < 10
-                    ? "0" + (date.getMonth() + 1)
-                    : date.getMonth() + 1;
-            const day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-            return date.getFullYear() + "-" + month + "-" + day;
-        },
+  head() {
+    return {
+      title: this.title
     }
+  },
+  methods: {
+    getLastDate: function(time) {
+      const date = new Date(time)
+      const month =
+        date.getMonth() + 1 < 10
+          ? '0' + (date.getMonth() + 1)
+          : date.getMonth() + 1
+      const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+      return date.getFullYear() + '-' + month + '-' + day
+    }
+  }
 }
 </script>
 

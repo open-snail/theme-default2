@@ -15,14 +15,14 @@ export default {
   async asyncData({ app, store, params }) {
     let result = await fetchLinkList(app.$axios.$request)
     return {
-      title: "友情链接"+ "-" + store.state.config.name,
+      title: '友情链接' + '-' + store.state.config.name,
       list: result.models
     }
   },
-  head () {
-      return {
-          title: this.title,
-      }
+  head() {
+    return {
+      title: this.title
+    }
   }
 }
 </script>
