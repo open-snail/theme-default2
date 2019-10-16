@@ -24,8 +24,38 @@ export const mutations = {
 }
 
 export const actions = {
-  async nuxtServerInit({ dispatch }) {
+  async nuxtServerInit({ dispatch, commit }, { req }) {
+    console.log("11111111111")
+    if (req.headers.cookie !== undefined) {
+      let arr = req.headers.cookie.split(';').filter(function (value, index, array) {
+        return value.indexOf('hello-blog-token=') !== -1
+      })
+      if (arr.length !== 0) {
+        // 获取token
+        const tokenName = arr[0].split('=')[0].trim()
+        const tokenValue = arr[0].split('=')[1].trim()
+        if (tokenName === 'hello-blog-token' && tokenValue !== null && tokenValue !== undefined && tokenValue !== '') {
+          commit('SET_TOKEN', tokenValue)
+        } else {
+          // 未登录状态
+          return
+        }
+
+        try {
+          await dispatch('getInfo', {Authorization: tokenValue})
+        } catch (error) {
+          console.log(error)
+        }
+      }
+
+    } else {
+      commit('SET_USER_INFO', null)
+      commit('SET_TOKEN', null)
+    }
+
+    await dispatch('getConfigList')
     await dispatch('fetchMasterInfo')
+
   },
   async fetchMasterInfo({ commit }) {
     const result = await fetchMasterInfo(this.$axios.$request);
@@ -35,14 +65,15 @@ export const actions = {
     }
   },
   async getInfo({ commit, state }) {
-    const result = await getInfo(this.$axios.$request,state.token);
+    const result = await getInfo(this.$axios.$request, state.token);
     if (result.success === 1) {
       commit("SET_USER_INFO", result.model);
       return result;
     }
   },
   async getConfigList({ commit }, params) {
-    const result = await fetchConfigList(this.$axios.$request,{ type: 0 });
+    const result = await fetchConfigList(this.$axios.$request,params);
+    console.log(result.model)
     if (result.success === 1) {
       commit("SET_CONFIG", result.model);
       return result;

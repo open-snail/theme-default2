@@ -45,11 +45,11 @@ export function fetchArchiveGroupYearList(request, query) {
   })
 }
 
-export function fetchConfigList(request, params) {
+export function fetchConfigList(request, query) {
   return request({
     url: '/api/blog/config/config-base/v1/list',
     method: 'get',
-    params
+    params: query
   })
 }
 
