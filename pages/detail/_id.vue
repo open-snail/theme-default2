@@ -13,45 +13,60 @@
         </span>
       </span>
     </div>
-    <div class="blog-content markdown-body" v-html="content">
+    <div class="blog-content markdown-body" v-html="postsContent">
     </div>
     <div class="comment">
       <div class="comment-desc">
-        {{detail.commentTime}}条评论
+        {{listQuery.total}}条评论
       </div>
-      <div class="comment-content" v-for="(item,index) in detail.comment" :key="index">
+      <div class="comment-content" v-for="(item,index) in list" :key="index">
 
         <div class="comment-avatar">
-          <img :src="item.avatar" alt="">
+          <img :src="item.authorAvatar" alt="">
         </div>
         <div class="comment-right">
           <div class="comment-right-name">
-            {{item.name}}
+            {{item.authorName}}
           </div>
           <div class="comment-right-content" >
+                <span
+                  v-if="
+                        item.parentUserName !== null &&
+                          item.parentUserName !== undefined &&
+                          item.parentUserName !== ''
+                      "
+                >@{{ item.parentUserName }}
+                    </span>
             {{item.content}}
           </div>
           <div class="comment-right-time">
-            {{item.time}}
-            <el-link>回复</el-link>
+            {{getFormatTime(item.createTime)}}
+            <el-link @click="reply(item)">回复</el-link>
           </div>
         </div>
 
       </div>
       <el-pagination
         layout="prev, pager, next"
-        :total="50">
+        :total="this.listQuery.total"
+        :page.sync="listQuery.page"
+        :limit.sync="listQuery.size"
+        @prev-click="prevPage"
+        @next-click="nextPage"
+        @current-change="currentPage"
+        >
       </el-pagination>
     </div>
     <div class="reply">
-      <el-avatar :size="50" class="reply-avatar"></el-avatar>
+      <el-avatar :size="50" class="reply-avatar" :src="userInfo.avatar"></el-avatar>
       <el-input
         style="width: 800px"
         type="textarea"
         :rows="3"
         placeholder="请输入内容"
-        v-model="replyValue"/>
-      <el-button type="primary" round > 发送</el-button>
+        @focus="login"
+        v-model="content"/>
+      <el-button type="primary" round @click="savePostsComments"> 发送</el-button>
     </div>
   </div>
 </template>
@@ -59,15 +74,44 @@
 <script>
     import { fetchArticle, savePostsComments, getPostsCommentsList  } from '~/api/index'
     import highlight from '~/plugins/highlight'
+    import { mapState } from "vuex";
 export default {
   name: '',
+    data(){
+      return {
+          isShowLogin: false,
+          content: "",
+          preContent: "",
+          list: null,
+          listQuery: {
+              page: 0,
+              size: 0,
+              total: 0
+          },
+          isReply: false,
+          parentId: null
+      };
+    },
+    computed: {
+        ...mapState({
+            userInfo: state => state.userInfo
+        })
+    },
    async asyncData({ app, store, params }) {
        let { model } = await fetchArticle(app.$axios.$request, params.id)
        let content = highlight(model.content)
-       console.log(model)
+       let { models, pageInfo } = await getPostsCommentsList(app.$axios.$request,{
+           postsId: model.id,
+           page: 1,
+           size: 5
+       })
+
         return {
             detail: model,
-            content: content
+            postsId: model.id,
+            postsContent: content,
+            list: models,
+            listQuery: pageInfo
         }
    },
     methods: {
@@ -112,7 +156,7 @@ export default {
                     console.log(this.content.indexOf(this.preContent, 0));
                 }
 
-                savePostsComments(json).then(res => {
+                savePostsComments(this.$axios.$request,json).then(res => {
                     console.log(res);
                     this.$message({
                         message: "评论成功",
@@ -121,12 +165,12 @@ export default {
                         duration: 1000
                     });
 
-                    this.getPostsCommentsList();
+                    this.getPostsCommentsList(this.$axios.$request);
                     this.content = "";
                 });
             },
             getPostsCommentsList(page) {
-                getPostsCommentsList({
+                getPostsCommentsList(this.$axios.$request,{
                     postsId: this.postsId,
                     page: page === undefined ? 1 : page,
                     size: 5
@@ -147,16 +191,51 @@ export default {
             },
             prevPage(item) {
                 console.log(item);
-                this.getPostsCommentsList(item);
+                this.getPostsCommentsList(this.$axios.$request,item);
             },
             nextPage(item) {
                 console.log(item);
-                this.getPostsCommentsList(item);
+                this.getPostsCommentsList(this.$axios.$request,item);
             },
             currentPage(item) {
                 console.log(item);
-                this.getPostsCommentsList(item);
+                this.getPostsCommentsList(this.$axios.$request,item);
+            },
+        getFormatTime(timestamp) {
+            var now = this.getUnix(); // 当前时间戳
+            var today = this.getTodayUnix(); // 今天0点的时间戳
+            // var year = this.getYearUnix() // 今年0点的时间戳
+            var timer = (now - timestamp) / 1000; // 转换为秒级时间戳
+            var tip = "";
+
+            if (timer <= 0) {
+                tip = "刚刚";
+            } else if (Math.floor(timer / 60) <= 0) {
+                tip = "刚刚";
+            } else if (timer < 3600) {
+                tip = Math.floor(timer / 60) + "分钟前";
+            } else if (timer >= 3600 && timestamp - today >= 0) {
+                tip = Math.floor(timer / 3600) + "小时前";
+            } else if (timer / 86400 <= 31) {
+                tip = Math.ceil(timer / 86400) + "天前";
+            } else {
+                tip = this.getLastDate(timestamp);
             }
+            return tip;
+        },
+        getUnix: function() {
+            var date = new Date();
+            return date.getTime();
+        },
+        // 获取今天0点0分0秒的时间戳
+        getTodayUnix: function() {
+            const date = new Date();
+            date.setHours(0);
+            date.setMinutes(0);
+            date.setSeconds(0);
+            date.setMilliseconds(0);
+            return date.getTime();
+        },
     },
   mounted() {
   }

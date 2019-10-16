@@ -1,6 +1,7 @@
 import { Message, Loading } from 'element-ui'
+import { getToken } from "~/plugins/auth";
 
-export default function({ $axios, redirect }) {
+export default function({ $axios, redirect,store }) {
 
   // 基本配置
   $axios.defaults.timeout = 10000
@@ -9,7 +10,9 @@ export default function({ $axios, redirect }) {
   $axios.defaults.headers.delete['Content-Type'] = 'application/x-www-form-urlencoded'
 
   $axios.onRequest(config => {
-
+    if (store.state.token) {
+      config.headers['Authorization'] = store.state.token;
+    }
   })
 
   $axios.onResponse(response => {
@@ -17,7 +20,7 @@ export default function({ $axios, redirect }) {
   })
 
   $axios.onError(error => {
-    loadingInstance.close()
+    // loadingInstance.close()
     console.log('error --->' + error)
     const code = parseInt(error.response && error.response.status)
   })

@@ -41,7 +41,7 @@ export default {
   plugins: [
     '@/plugins/element-ui',
     { src: '~plugins/highlight.js' },
-    { src: '~plugins/auth.js', ssr: false },
+    { src: '~plugins/auth.js'},
     { src: "~/plugins/axios.js" },
   ],
   /*

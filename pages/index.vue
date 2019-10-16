@@ -33,17 +33,9 @@
 import { fetchArticleList } from '~/api/index'
 
 export default {
-  data() {
-    return {
-      itemList: [
-        { id: '1', title: '标题', content: '我是内容' },
-        { id: '2', title: '标题', content: '我是内容' }
-      ],
-      page: { name: 1 }
-    }
-  },
   async asyncData({ app, store, params }) {
     let { models, pageInfo } = await fetchArticleList(app.$axios.$request, { page: 1, size: 5 })
+      // await store.dispatch("getConfigList")
     return {
       list: models,
       page: pageInfo
@@ -61,8 +53,6 @@ export default {
 </script>
 
 <style scoped>
-
-
   .body {
     padding-top: 20px;
     display: flex;
