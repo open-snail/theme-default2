@@ -35,21 +35,21 @@ export const actions = {
     }
   },
   async getInfo({ commit, state }) {
-    const result = await getInfo(state.token);
+    const result = await getInfo(this.$axios.$request,state.token);
     if (result.success === 1) {
       commit("SET_USER_INFO", result.model);
       return result;
     }
   },
   async getConfigList({ commit }, params) {
-    const result = await fetchConfigList({ type: 0 });
+    const result = await fetchConfigList(this.$axios.$request,{ type: 0 });
     if (result.success === 1) {
       commit("SET_CONFIG", result.model);
       return result;
     }
   },
   async login({ commit, dispatch }, params) {
-    const result = await login(params);
+    const result = await login(this.$axios.$request,params);
     const { model, success } = result;
     if (success === 1) {
       commit("SET_TOKEN", model.token);
