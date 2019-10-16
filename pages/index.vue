@@ -10,9 +10,9 @@
           <h1 class="item-title">{{ item.title }}</h1>
           <div class="item-content">{{ item.summary }}</div>
           <div class="icon">
-            <i class="iconfont icon-eye"></i>
+            <i class="iconfont iconeye"></i>
             <span style="margin-right: 15px">{{item.views}}</span>
-            <i class="iconfont icon-pinglun"></i>
+            <i class="iconfont iconpinglun"></i>
             <span>{{item.comments}}</span>
           </div>
         </NuxtLink>
@@ -82,11 +82,16 @@ export default {
 
   .item-content {
     padding-left: 40px;
+    text-decoration:none !important;
+    color: #222;
   }
 
   .icon {
+    text-decoration:none !important;
     padding-top: 20px;
     padding-left: 40px;
+    color: #222;
+
   }
 
   .pagination {
