@@ -8,8 +8,8 @@
       <span>阅读:{{detail.views}}次</span>
      </span>
       <span class="right">
-        <span v-for="(item,index) in detail.tag" :key="index">
-          {{item}}
+        <span v-for="(item,index) in detail.tagsList" :key="index">
+          {{item.name}}
         </span>
       </span>
     </div>
@@ -105,6 +105,16 @@ export default {
            page: 1,
            size: 5
        })
+
+       app.head.title = model.title || "" + "-" + store.state.config.name
+       let keywords = ""
+       model.tagsList.forEach((value, index, array) => {
+           keywords = keywords + value.name +","
+       })
+       app.head.meta = [
+           { hid: 'description', name: 'description', content: model.summary||"" },
+           { hid: 'keywords', name: 'keywords', content: keywords }
+       ]
 
         return {
             detail: model,

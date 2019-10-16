@@ -42,9 +42,15 @@ export default {
       })
 
     return {
-      list: dest
+      list: dest,
+        title: "归档" + "-" + store.state.config.name
     }
   },
+    head () {
+        return {
+            title: this.title,
+        }
+    },
    methods: {
         getLastDate: function(time) {
             const date = new Date(time);

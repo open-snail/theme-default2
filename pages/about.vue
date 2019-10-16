@@ -12,7 +12,17 @@ export default {
     return {
       about: { title: '关于我的博客', content: '内容' }
     }
-  }
+  },
+  async asyncData({ app, store, params }) {
+      return {
+          title: "关于我"+ "-" + store.state.config.name
+      }
+   },
+    head () {
+        return {
+            title: this.title,
+        }
+    }
 }
 </script>
 
