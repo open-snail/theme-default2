@@ -28,7 +28,12 @@
           />
           <i
             @click="friendlyClick"
-            class="iconfont icon-github"
+            class="iconfont icongithub"
+            style="font-size: 28px;text-align: center"
+          ></i>
+          <i
+            @click="friendlyClick"
+            class="iconfont iconyouxiang"
             style="font-size: 28px;text-align: center"
           ></i>
         </div>

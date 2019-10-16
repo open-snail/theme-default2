@@ -87,6 +87,7 @@ export default {
 
   .item-content {
     padding-left: 40px;
+    color: #222;
   }
 
   .icon {
