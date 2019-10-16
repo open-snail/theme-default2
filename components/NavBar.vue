@@ -26,16 +26,22 @@
             placeholder="请输入内容"
             style=" width: 200px;margin-left: 400px;background-color: transparent;border-radius: 10px;border: 1px solid #999"
           />
-          <i
-            @click="friendlyClick"
-            class="iconfont icongithub"
-            style="font-size: 28px;text-align: center"
-          ></i>
-          <i
-            @click="friendlyClick"
-            class="iconfont iconyouxiang"
-            style="font-size: 28px;text-align: center"
-          ></i>
+          <el-tooltip class="item" effect="dark" content="点击跳转Github" placement="top-start">
+            <i
+              @click="friendlyClick"
+              class="iconfont icongithub"
+              style="font-size: 28px;text-align: center"
+            ></i>
+          </el-tooltip>
+
+
+          <el-tooltip class="item" effect="dark" content="点击复制邮箱" placement="top-start">
+            <i
+              @click="copyEmail"
+              class="iconfont iconyouxiang"
+              style="font-size: 28px;text-align: center"
+            ></i>
+          </el-tooltip>
         </div>
       </el-col>
     </el-row>
@@ -48,12 +54,19 @@ export default {
   data() {
     return {
       curIndex: 0,
-      tabs: ['首页', '标签', '归档', '关于','友情链接'],
-      masterUserInfo: this.$store.state.masterUserInfo
+      tabs: ['首页', '标签', '归档', '关于', '友情链接'],
+      masterUserInfo: this.$store.state.masterUserInfo,
+      email: 'xxxx@gmail.com'
     }
   }, methods: {
+    copyEmail() {
+      this.$copyText(this.email).then(() => {
+
+        this.$message.success('复制到剪切板成功!')
+      })
+    },
     friendlyClick() {
-     window.location.href= this.masterUserInfo.htmlUrl
+      window.location.href = this.masterUserInfo.htmlUrl
     },
     changeTabClick(item) {
       const exeFn = {
@@ -84,6 +97,7 @@ export default {
     padding: 0;
     margin: 0;
     background-image: url('~assets/images/logo.jpg');
+    background-color:transparent;
     position: relative;
     height: 300px;
     display: flex;
@@ -113,7 +127,8 @@ export default {
           font-size: 20px;
           padding: 5px;
         }
-        .tab:hover{
+
+        .tab:hover {
           color: black;
 
         }

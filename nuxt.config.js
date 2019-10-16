@@ -19,7 +19,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: '#222' },
   /*
    ** Global CSS
    */
@@ -43,6 +43,7 @@ export default {
     { src: '~plugins/highlight.js' },
     { src: '~plugins/auth.js'},
     { src: "~/plugins/axios.js" },
+    { src: "~/plugins/clipboard2.js" },
   ],
   /*
    ** Nuxt.js dev-modules
@@ -54,7 +55,8 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+
   ],
   /*
    ** Axios module configuration
