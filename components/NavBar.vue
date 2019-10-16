@@ -55,13 +55,11 @@ export default {
     return {
       curIndex: 0,
       tabs: ['首页', '标签', '归档', '关于', '友情链接'],
-      masterUserInfo: this.$store.state.masterUserInfo,
-      email: 'xxxx@gmail.com'
+      masterUserInfo: this.$store.state.masterUserInfo
     }
   }, methods: {
     copyEmail() {
-      this.$copyText(this.email).then(() => {
-
+      this.$copyText(this.masterUserInfo.email).then(() => {
         this.$message.success('复制到剪切板成功!')
       })
     },
