@@ -13,6 +13,16 @@
     import openWindow from "@/plugins/open-window";
 export default {
   name: 'login',
+    async asyncData({ app, store, params }) {
+        return {
+            title: "登录"+ "-" + store.state.config.name
+        }
+    },
+    head () {
+        return {
+            title: this.title,
+        }
+    },
    methods: {
         handleLogin() {
             getOauthLoginByGithub(this.$axios.$request).then(res => {

@@ -35,7 +35,12 @@ import { fetchArticleList } from '~/api/index'
 export default {
   async asyncData({ app, store, params }) {
     let { models, pageInfo } = await fetchArticleList(app.$axios.$request, { page: 1, size: 5 })
-      // await store.dispatch("getConfigList")
+     let config = store.state.config
+      app.head.title = config.name || ""
+      app.head.meta = [
+          { hid: 'description', name: 'description', content: config.description||"" },
+          { hid: 'keywords', name: 'keywords', content: config.keywords || "" }
+      ]
     return {
       list: models,
       page: pageInfo

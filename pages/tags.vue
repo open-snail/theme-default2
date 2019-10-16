@@ -17,9 +17,16 @@ export default {
     let result = await fetchTagsList(app.$axios.$request)
     console.log(result.models)
     return {
+      title : "标签"+ "-" + store.state.config.name,
       list: result.models
     }
-  }
+  },
+   head () {
+      return {
+          title: this.title,
+      }
+   }
+
 }
 </script>
 

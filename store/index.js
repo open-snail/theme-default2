@@ -25,7 +25,6 @@ export const mutations = {
 
 export const actions = {
   async nuxtServerInit({ dispatch, commit }, { req }) {
-    console.log("11111111111")
     if (req.headers.cookie !== undefined) {
       let arr = req.headers.cookie.split(';').filter(function (value, index, array) {
         return value.indexOf('hello-blog-token=') !== -1
@@ -73,9 +72,35 @@ export const actions = {
   },
   async getConfigList({ commit }, params) {
     const result = await fetchConfigList(this.$axios.$request,params);
-    console.log(result.model)
     if (result.success === 1) {
-      commit("SET_CONFIG", result.model);
+      let config = {}
+
+      result.models.forEach(item => {
+        if (item.configKey === "name") {
+          config['name'] = item.configValue
+        }
+
+        if (item.configKey === "keywords") {
+          config['keywords'] = item.configValue
+        }
+
+        if (item.configKey === "description") {
+          config['description'] = item.configValue
+        }
+
+        if (item.configKey === "copyright") {
+          config['copyright'] = item.configValue
+        }
+
+        if (item.configKey === "metas") {
+          config['metas'] = item.configValue
+        }
+
+        if (item.configKey === "icp") {
+          config['icp'] = item.configValue
+        }
+      });
+      commit("SET_CONFIG", config);
       return result;
     }
   },
