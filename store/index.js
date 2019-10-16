@@ -1,6 +1,5 @@
 import { fetchMasterInfo, login, getInfo, fetchConfigList } from "@/api/index";
 import { getToken, setToken, removeToken } from "@/plugins/auth";
-
 export const state = () => ({
   masterUserInfo: null,
   userInfo: null,
