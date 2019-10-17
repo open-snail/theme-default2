@@ -26,12 +26,12 @@ export default {
 
     .tag-name {
       display: inline;
-      background-color: rgb(222, 232, 242);
+      /*background-color: rgb(222, 232, 242);*/
     }
 
     .tag-count {
       display: inline;
-      background-color: rgb(193, 222, 230);
+      /*background-color: rgb(193, 222, 230);*/
     }
   }
 </style>

@@ -1,5 +1,9 @@
 <template>
+
+
   <div class="blog-detail">
+    <el-scrollbar style="height: 100%">
+
     <h1>{{ detail.title }}</h1>
     <div class="blog-desc">
       <span class="left">
@@ -53,23 +57,26 @@
       </el-pagination>
     </div>
     <div class="reply">
-      <el-avatar
-        :size="50"
+      <img
         class="reply-avatar"
         :src="userInfo !== null ? userInfo.avatar : masterUserInfo.avatar"
-      ></el-avatar>
+      />
       <el-input
-        style="width: 800px"
+        style="width: 750px"
         type="textarea"
         :rows="3"
         placeholder="请输入内容"
         @focus="login"
         v-model="content"
       />
-      <el-button type="primary" round @click="savePostsComments">
+      <el-button class="send-button" @click="savePostsComments">
         发送</el-button
       >
+      <el-backtop ></el-backtop>
+
     </div>
+  </el-scrollbar>
+
   </div>
 </template>
 
@@ -260,6 +267,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .blog-detail {
   width: 1000px;
   padding-top: 30px;
@@ -293,14 +301,13 @@ export default {
       display: flex;
 
       .comment-avatar img {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
         border-radius: 10px;
         margin: 10px;
       }
 
       .comment-right {
-        padding-top: 40px;
 
         .comment-right-name {
           font-size: 16px;
@@ -324,10 +331,19 @@ export default {
   }
 
   .reply {
+    display: flex;
+    margin: 10px;
+    padding: 10px;
     .reply-avatar {
-      margin: 10px;
+      margin: 0 10px;
+      text-align: center;
+      width: 80px;
+      height: 80px;
     }
-    flex: 1;
+  }
+  .send-button{
+    margin: 20px;
+    size: 100px;
   }
 }
 </style>

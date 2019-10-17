@@ -10,6 +10,7 @@
 
 <script>
 import { fetchLinkList } from '~/api/index'
+
 export default {
   name: 'friend',
   async asyncData({ app, store, params }) {
@@ -28,29 +29,33 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.friendly {
-  width: 1000px;
-  padding-top: 20px;
-  display: flex;
-  flex-direction: row;
-  margin: 0 auto;
-  justify-items: center;
+  .friendly {
+    width: 1000px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    justify-items: center;
 
-  .item {
-    text-align: center;
-    margin: 20px;
-    padding: 30px;
-    border: 1px solid rgb(245, 245, 245);
-    border-radius: 10px;
-
-    .name {
-      margin: 5px;
+    .item {
       text-align: center;
+      margin: 20px;
+      padding: 30px;
+      border: 1px solid rgb(245, 245, 245);
+      border-radius: 10px;
+
+      .name {
+        margin: 5px;
+        text-align: center;
+      }
+
+      .desc {
+        margin: 5px;
+      }
     }
 
-    .desc {
-      margin: 5px;
+    .item:hover {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .22), 0 0 6px rgba(0, 0, 0, .05)
     }
   }
-}
 </style>
