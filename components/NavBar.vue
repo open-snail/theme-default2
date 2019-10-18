@@ -6,57 +6,74 @@
         <span class="name">{{ masterUserInfo.name }}</span>
       </div>
     </div>
-    <el-row :gutter="20" type="flex" align="middle" class="header-tab">
-      <el-col :span="14" :offset="5">
-        <div class="tabs">
-          <span class="tab-item">
-            <span
-              v-for="(tab, index) in tabs"
-              :key="index"
-              @click="changeTabClick(tab)"
+    <el-row class="header-tab tabs">
+      <!-- 1 -->
+      <el-col
+        :xs="{ span: 0, offset: 0 }"
+        :sm="{ span: 12, offset: 0 }"
+        :md="{ span: 12, offset: 0 }"
+        :lg="{ span: 6, offset: 5 }"
+        :xl="{ span: 6, offset: 6 }"
+      >
+        <span class="tab-item">
+          <span
+            v-for="(tab, index) in tabs"
+            :key="index"
+            @click="changeTabClick(tab)"
+          >
+            <el-link
+              class="tab"
+              :class="{ active: index === curIndex }"
+              @click="curIndex = index"
             >
-              <el-link
-                class="tab"
-                :class="{ active: index === curIndex }"
-                @click="curIndex = index"
-              >
-                {{ tab }}
-              </el-link>
-            </span>
+              {{ tab }}
+            </el-link>
           </span>
+        </span>
+      </el-col>
+      <!-- 2 -->
+      <el-col
+        :xs="{ span: 4, offset: 6 }"
+        :sm="{ span: 3, offset: 2 }"
+        :md="{ span: 4, offset: 2 }"
+        :lg="{ span: 3, offset: 2 }"
+        :xl="{ span: 3, offset: 2 }"
+      >
+        <input class="input" placeholder="请输入内容" style="" />
+      </el-col>
+      <!-- 3 -->
+      <el-col
+        :xs="{ span: 6, offset: 6 }"
+        :sm="{ span: 2, offset: 3 }"
+        :md="{ span: 2, offset: 2 }"
+        :lg="{ span: 2, offset: 2 }"
+        :xl="{ span: 2, offset: 0 }"
+      >
+        <el-tooltip
+          class="item"
+          effect="dark"
+          content="点击跳转Github"
+          placement="top-start"
+        >
+          <i
+            @click="friendlyClick"
+            class="iconfont icongithub"
+            style="font-size: 28px;text-align: center"
+          ></i>
+        </el-tooltip>
 
-          <input
-            class="input"
-            placeholder="请输入内容"
-            style=" width: 200px;margin-left: 400px;background-color: transparent;border-radius: 10px;border: 1px solid #999"
-
-          />
-          <el-tooltip
-            class="item"
-            effect="dark"
-            content="点击跳转Github"
-            placement="top-start"
-          >
-            <i
-              @click="friendlyClick"
-              class="iconfont icongithub"
-              style="font-size: 28px;text-align: center"
-            ></i>
-          </el-tooltip>
-
-          <el-tooltip
-            class="item"
-            effect="dark"
-            content="点击复制邮箱"
-            placement="top-start"
-          >
-            <i
-              @click="copyEmail"
-              class="iconfont iconyouxiang"
-              style="font-size: 28px;text-align: center"
-            ></i>
-          </el-tooltip>
-        </div>
+        <el-tooltip
+          class="item"
+          effect="dark"
+          content="点击复制邮箱"
+          placement="top-start"
+        >
+          <i
+            @click="copyEmail"
+            class="iconfont iconyouxiang"
+            style="font-size: 28px;text-align: center"
+          ></i>
+        </el-tooltip>
       </el-col>
     </el-row>
   </div>
@@ -70,7 +87,7 @@ export default {
       curIndex: 0,
       tabs: ['首页', '标签', '归档', '关于', '友情链接'],
       masterUserInfo: this.$store.state.masterUserInfo,
-      keywords: null,
+      keywords: null
     }
   },
   methods: {
@@ -102,8 +119,8 @@ export default {
       }
       exeFn[item]()
     },
-    search(){
-        this.$store.commit("SET_KEYWORDS", this.keywords)
+    search() {
+      this.$store.commit('SET_KEYWORDS', this.keywords)
     }
   }
 }
@@ -132,18 +149,19 @@ export default {
 }
 
 .header-tab {
+  height: 50px;
+  line-height: 50px;
   margin-top: -50px;
 
+  .input {
+    width: 200px;
+    font-size: 20px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid #999;
+  }
   .tabs {
-    display: flex;
-    justify-content: space-between;
-
     .tab-item {
-      .tab {
-        font-size: 20px;
-        padding: 5px;
-      }
-
       .tab:hover {
         color: black;
       }
@@ -154,5 +172,12 @@ export default {
       /*border-bottom-width: 5px;*/
     }
   }
+}
+span /deep/ .el-link--inner {
+  font-size: 20px !important;
+  padding: 5px;
+}
+span /deep/ .el-link--inner:hover {
+  color: black;
 }
 </style>

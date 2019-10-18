@@ -1,19 +1,30 @@
 <template>
   <div class="index">
-    <div class="body">
-      <div class="item" v-for="(item, index) in list" :key="index">
-        <NuxtLink :to="'/detail/' + item.id" style="text-decoration:none;color: #1b1f23">
-          <h1 class="item-title">{{ item.title }}</h1>
-          <div class="item-content">{{ item.summary }}</div>
-          <div class="icon">
-            <i class="iconfont iconeye"></i>
-            <span style="margin-right: 15px">{{ item.views }}</span>
-            <i class="iconfont iconpinglun"></i>
-            <span>{{ item.comments }}</span>
-          </div>
-        </NuxtLink>
-      </div>
-    </div>
+    <el-row class="body">
+      <el-col
+        :xs="{ span: 0, offset: 0 }"
+        :sm="{ span: 24, offset: 0 }"
+        :md="{ span: 24, offset: 0 }"
+        :lg="{ span: 6, offset: 5 }"
+        :xl="{ span: 6, offset: 6 }"
+      >
+        <div class="item" v-for="(item, index) in list" :key="index">
+          <NuxtLink
+            :to="'/detail/' + item.id"
+            style="text-decoration:none;color: #1b1f23"
+          >
+            <h1 class="item-title">{{ item.title }}</h1>
+            <div class="item-content">{{ item.summary }}</div>
+            <div class="icon">
+              <i class="iconfont iconeye"></i>
+              <span style="margin-right: 15px">{{ item.views }}</span>
+              <i class="iconfont iconpinglun"></i>
+              <span>{{ item.comments }}</span>
+            </div>
+          </NuxtLink>
+        </div>
+      </el-col>
+    </el-row>
     <!--    分页-->
     <el-pagination
       class="pagination"
@@ -30,13 +41,13 @@ import { fetchArticleList } from '~/api/index'
 
 export default {
   name: 'Index',
-  props:{
-      list: {
-          type: Array
-      },
-      page: {
-          type:Object
-      }
+  props: {
+    list: {
+      type: Array
+    },
+    page: {
+      type: Object
+    }
   },
   methods: {
     async pageChange(val) {
@@ -90,7 +101,14 @@ export default {
 }
 
 .pagination {
-  width: 300px;
   margin: 0 auto;
+}
+.item:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
+.index {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 </style>
