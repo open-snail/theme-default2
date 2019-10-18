@@ -165,13 +165,13 @@ export default {
     }
   }
   /deep/ input::-webkit-input-placeholder {
-    color: #222;
+    color: #606266;
   }
   /deep/ input::-moz-input-placeholder {
-    color: #222;
+    color: #606266;
   }
   /deep/ input::-ms-input-placeholder {
-    color: #222;
+    color: #606266;
   }
 
   .tabs {
