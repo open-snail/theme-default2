@@ -42,7 +42,8 @@ export default {
     async pageChange(val) {
       let { models, pageInfo } = await fetchArticleList(this.$axios.$request, {
         page: val,
-        size: 5
+        size: 5,
+        keywords: this.$store.state.keywords
       })
       this.page = pageInfo
       this.list = models

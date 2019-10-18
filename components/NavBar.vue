@@ -69,7 +69,8 @@ export default {
     return {
       curIndex: 0,
       tabs: ['首页', '标签', '归档', '关于', '友情链接'],
-      masterUserInfo: this.$store.state.masterUserInfo
+      masterUserInfo: this.$store.state.masterUserInfo,
+      keywords: null,
     }
   },
   methods: {
@@ -102,7 +103,7 @@ export default {
       exeFn[item]()
     },
     search(){
-        this.$store.commit("SET_KEYWORDS")
+        this.$store.commit("SET_KEYWORDS", this.keywords)
     }
   }
 }

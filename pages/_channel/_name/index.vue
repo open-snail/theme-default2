@@ -11,7 +11,8 @@ export default {
   async asyncData({ app, store, params }) {
       let query = {
           page: 1,
-          size: 5
+          size: 5,
+          keywords: store.state.keywords
       }
       if (params !== null && params.channel === "tags"){
           query['tagsName'] = params.name
