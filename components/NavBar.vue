@@ -39,7 +39,9 @@
         :lg="{ span: 3, offset: 2 }"
         :xl="{ span: 3, offset: 2 }"
       >
-        <input class="input" placeholder="请输入内容" style="" />
+        <el-input class="input" placeholder="查询点什么">
+          <i slot="suffix" class="el-input__icon el-icon-search"></i>
+        </el-input>
       </el-col>
       <!-- 3 -->
       <el-col
@@ -155,11 +157,23 @@ export default {
 
   .input {
     width: 200px;
-    font-size: 20px;
-    background-color: transparent;
-    border-radius: 10px;
-    border: 1px solid #999;
+    font-size: 16px;
+
+    /deep/ .el-input__inner {
+      color: #222;
+      background-color: transparent;
+    }
   }
+  /deep/ input::-webkit-input-placeholder {
+    color: #222;
+  }
+  /deep/ input::-moz-input-placeholder {
+    color: #222;
+  }
+  /deep/ input::-ms-input-placeholder {
+    color: #222;
+  }
+
   .tabs {
     .tab-item {
       .tab:hover {

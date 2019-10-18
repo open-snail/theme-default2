@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Index :list="list" :page="page"/>
+    <Index :list="list" :page="page" />
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
   },
 
   components: {
-      Index
+    Index
   }
 }
 </script>
