@@ -40,7 +40,7 @@
             <i
               @click="friendlyClick"
               class="iconfont icongithub"
-              style="font-size: 28px;text-align: center"
+              style="font-size: 28px;text-align: center;cursor: pointer"
             ></i>
           </el-tooltip>
 
@@ -53,7 +53,7 @@
             <i
               @click="copyEmail"
               class="iconfont iconyouxiang"
-              style="font-size: 28px;text-align: center"
+              style="font-size: 28px;text-align: center;cursor: pointer"
             ></i>
           </el-tooltip>
         </div>
