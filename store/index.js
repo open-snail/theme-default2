@@ -4,7 +4,8 @@ export const state = () => ({
   masterUserInfo: null,
   userInfo: null,
   token: getToken(),
-  config: null
+  config: null,
+  keywords: null
 })
 
 export const mutations = {
@@ -19,7 +20,10 @@ export const mutations = {
   },
   SET_CONFIG: (state, config) => {
     state.config = config;
-  }
+  },
+  SET_KEYWORDS: (state, keywords) => {
+    state.keywords = keywords;
+  },
 }
 
 export const actions = {

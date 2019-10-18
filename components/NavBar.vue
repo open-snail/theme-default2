@@ -29,6 +29,7 @@
             class="input"
             placeholder="请输入内容"
             style=" width: 200px;margin-left: 400px;background-color: transparent;border-radius: 10px;border: 1px solid #999"
+
           />
           <el-tooltip
             class="item"
@@ -99,6 +100,9 @@ export default {
         }
       }
       exeFn[item]()
+    },
+    search(){
+        this.$store.commit("SET_KEYWORDS")
     }
   }
 }

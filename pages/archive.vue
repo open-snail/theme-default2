@@ -3,10 +3,13 @@
     <div class="archive" v-for="item in list">
       <div class="title">{{ item.year }}</div>
       <ul>
-        <li class="content" v-for="item1 in item.data">
-          <span> {{ item1.title }}</span>
-          <span>{{ getLastDate(item1.createTime) }}</span>
-        </li>
+        <nuxt-link :to="'/detail/'+ item.id" style="text-decoration:none;color: #1b1f23">
+          <li class="content" v-for="item1 in item.data">
+            <span> {{ item1.title }}</span>
+            <span>{{ getLastDate(item1.createTime) }}</span>
+          </li>
+        </nuxt-link>
+
       </ul>
     </div>
   </div>
@@ -75,7 +78,7 @@ export default {
   justify-items: center;
 
   .title {
-    font-size: 16px;
+    font-size: 25px;
     color: #999;
   }
 

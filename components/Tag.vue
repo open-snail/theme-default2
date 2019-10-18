@@ -1,5 +1,5 @@
 <template>
-    <div class="tag">
+    <div class="tag" @click="findArticleListByTag">
       <span class="tag-name">{{ name }}  <span class="tag-count">{{ count }}</span></span>
     </div>
 </template>
@@ -16,6 +16,11 @@ export default {
       type: Number,
       default: 0
     }
+  },
+  methods: {
+      findArticleListByTag(){
+          this.$router.push("/tags/"+this.name)
+      }
   }
 }
 </script>
@@ -23,6 +28,7 @@ export default {
 <style scoped lang="scss">
   .tag {
     margin: 10px;
+    cursor: pointer;
 
     .tag-name {
       display: inline;

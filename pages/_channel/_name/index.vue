@@ -6,13 +6,18 @@
 
 <script>
 import { fetchArticleList } from '~/api/index'
-import Index from '../components/Index'
+import Index from '~/components/Index'
 export default {
   async asyncData({ app, store, params }) {
-    let { models, pageInfo } = await fetchArticleList(app.$axios.$request, {
-      page: 1,
-      size: 5
-    })
+      let query = {
+          page: 1,
+          size: 5
+      }
+      if (params !== null && params.channel === "tags"){
+          query['tagsName'] = params.name
+      }
+
+    let { models, pageInfo } = await fetchArticleList(app.$axios.$request, query)
     let config = store.state.config
     app.head.title = config.name || ''
     app.head.meta = [
@@ -28,7 +33,6 @@ export default {
       page: pageInfo
     }
   },
-
   components: {
       Index
   }
