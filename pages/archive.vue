@@ -3,13 +3,12 @@
     <div class="archive" v-for="item in list">
       <div class="title">{{ item.year }}</div>
       <ul>
-        <nuxt-link :to="'/detail/'+ item1.id" style="text-decoration:none;color: #1b1f23" v-for="item1 in item.data">
+        <nuxt-link :to="'/detail/'+ item1.id" style="text-decoration:none;color: #1b1f23" v-for="item1 in item.data" :key="item1.id">
           <li class="content" >
             <span> {{ item1.title }}</span>
             <span>{{ getLastDate(item1.createTime) }}</span>
           </li>
         </nuxt-link>
-
       </ul>
     </div>
   </div>

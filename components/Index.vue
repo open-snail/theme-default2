@@ -1,7 +1,7 @@
 <template>
   <div id="scroll" class="index">
     <div class="body">
-      <div class="item" v-for="(item, index) in list" :key="index">
+      <div class="item" v-for="(item, index) in articleList" :key="index">
         <NuxtLink
           :to="'/detail/' + item.id"
           style="text-decoration:none;color: #1b1f23"
@@ -17,21 +17,13 @@
         </NuxtLink>
       </div>
     </div>
-    <!--    分页-->
-    <el-pagination
-      class="pagination"
-      @current-change="pageChange"
-      layout="prev,pager,next"
-      :page-size="page.size"
-      :total="page.total"
-    ></el-pagination>
   </div>
 </template>
 
 <script>
 let timer = null
 import { fetchArticleList } from '~/api/index'
-
+import bus from "../plugins/eventBus.js";
 export default {
   name: 'Index',
   props: {
@@ -44,20 +36,31 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      keywords: null,
+      pageInfo: this.page,
+      articleList: this.list
+    }
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll)
+
+    bus.$on("searchValue", value => {
+      this.keywords = value;
+      this.search(1)
+    });
   },
   destroyed() {
     window.removeEventListener('scroll', this.handleScroll)
+  },
+  computed : {
   },
   watch: {
     refreshLoading(val) {
       if (!val) {
         this.refresh.height = 0
       }
-    }
+    },
   },
   methods: {
     handleScroll() {
@@ -68,29 +71,30 @@ export default {
         document.documentElement.clientHeight || document.body.clientHeight //变量scrollHeight是滚动条的总高度
       var scrollHeight =
         document.documentElement.scrollHeight || document.body.scrollHeight //滚动条到底部的条件
-      if (scrollTop + windowHeight == scrollHeight) {
-        //写后台加载数据的函数
-        // console.log(
-        //   '距顶部' +
-        //     scrollTop +
-        //     '可视区高度' +
-        //     windowHeight +
-        //     '滚动条总高度' +
-        //     scrollHeight
-        // )
-        console.log(this.page)
-        this.page.page += 1
-        this.pageChange(this.page.page)
+      if (scrollTop + windowHeight === scrollHeight) {
+        if (this.pageInfo.page * this.pageInfo.size <= this.pageInfo.total) {
+          this.pageInfo.page += 1
+          this.pageChange(this.pageInfo.page)
+        }
       }
     },
     async pageChange(val) {
       let { models, pageInfo } = await fetchArticleList(this.$axios.$request, {
         page: val,
         size: 5,
-        keywords: this.$store.state.keywords
+        keywords: this.keywords
       })
-      this.page = pageInfo
-      this.list = models
+      this.pageInfo = pageInfo
+      this.articleList.push(...models)
+    },
+    async search(val) {
+      let { models, pageInfo } = await fetchArticleList(this.$axios.$request, {
+        page: val,
+        size: 5,
+        keywords: this.keywords
+      })
+      this.pageInfo = pageInfo
+      this.articleList = models
     }
   },
   components: {}

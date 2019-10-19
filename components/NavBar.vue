@@ -39,8 +39,12 @@
         :lg="{ span: 3, offset: 2 }"
         :xl="{ span: 3, offset: 2 }"
       >
-        <el-input class="input" placeholder="查询点什么">
-          <i slot="suffix" class="el-input__icon el-icon-search"></i>
+        <el-input class="input" placeholder="查询点什么" v-model="keywords">
+          <i
+            slot="suffix"
+            class="el-input__icon el-icon-search"
+            @click="search"
+          ></i>
         </el-input>
       </el-col>
       <!-- 3 -->
@@ -82,6 +86,7 @@
 </template>
 
 <script>
+import bus from '../plugins/eventBus.js'
 export default {
   name: 'NavBar',
   data() {
@@ -122,7 +127,7 @@ export default {
       exeFn[item]()
     },
     search() {
-      this.$store.commit('SET_KEYWORDS', this.keywords)
+      bus.$emit('searchValue', this.keywords)
     }
   }
 }
