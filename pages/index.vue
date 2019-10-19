@@ -11,8 +11,7 @@ export default {
   async asyncData({ app, store, params }) {
     let { models, pageInfo } = await fetchArticleList(app.$axios.$request, {
       page: 1,
-      size: 5,
-      keywords: store.state.keywords
+      size: 5
     })
     let config = store.state.config
     app.head.title = config.name || ''

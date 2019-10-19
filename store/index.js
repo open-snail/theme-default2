@@ -4,8 +4,7 @@ export const state = () => ({
   masterUserInfo: null,
   userInfo: null,
   token: getToken(),
-  config: null,
-  keywords: null
+  config: null
 })
 
 export const mutations = {
