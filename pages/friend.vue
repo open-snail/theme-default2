@@ -1,6 +1,6 @@
 <template>
   <div class="friendly">
-    <div v-for="item in list" :key="item.id" class="item">
+    <div v-for="item in list" :key="item.id" class="item" @click="go(item.href)" style="cursor: pointer">
       <el-avatar class="img" :size="100" :src="item.logo"></el-avatar>
       <div class="name">{{ item.name }}</div>
       <div class="desc">{{ item.description }}</div>
@@ -23,6 +23,11 @@ export default {
   head() {
     return {
       title: this.title
+    }
+  },
+  methods:{
+    go(href){
+      window.location.href = href
     }
   }
 }
