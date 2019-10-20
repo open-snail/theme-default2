@@ -34,11 +34,8 @@ export default {
       console.log(e.data)
       if (socialId) {
         this.$store.dispatch('login', e.data).then(res => {
-          console.log(res)
           if (res.success === 1) {
-            this.$router.push({
-              path: '/'
-            })
+            this.$router.go(-1)
           }
         })
         window.removeEventListener('message', this.loginGithubHandel, false)

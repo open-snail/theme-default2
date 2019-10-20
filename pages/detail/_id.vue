@@ -190,7 +190,7 @@ export default {
           duration: 1000
         })
 
-        this.getPostsCommentsList(this.$axios.$request)
+        this.getPostsCommentsList(1)
         this.content = ''
       })
     },
@@ -200,7 +200,6 @@ export default {
         page: page === undefined ? 1 : page,
         size: 5
       }).then(res => {
-        console.log(res)
         const { success, models, pageInfo } = res
         if (success === 1) {
           this.list = models
@@ -215,15 +214,12 @@ export default {
       this.parentId = item.id
     },
     prevPage(item) {
-      console.log(item)
       this.getPostsCommentsList(this.$axios.$request, item)
     },
     nextPage(item) {
-      console.log(item)
       this.getPostsCommentsList(this.$axios.$request, item)
     },
     currentPage(item) {
-      console.log(item)
       this.getPostsCommentsList(this.$axios.$request, item)
     },
     getFormatTime(timestamp) {
