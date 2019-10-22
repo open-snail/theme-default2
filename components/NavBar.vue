@@ -156,14 +156,14 @@ export default {
   img {
     z-index: 1;
     width: 100%;
+    filter: blur(5px);
+    overflow: hidden;
+    background: inherit;
   }
-  -webkit-filter: blur(5px); /* Chrome, Opera */
-  -moz-filter: blur(5px);
-  -ms-filter: blur(5px);
-  filter: blur(5px);
-  overflow: hidden;
-  background: inherit;
-
+  // -webkit-filter: blur(2px); /* Chrome, Opera */
+  // -moz-filter: blur(2px);
+  // -ms-filter: blur(2px);
+  // filter: blur(2px);
   .avatar {
     position: absolute;
     left: 40%;
@@ -174,6 +174,8 @@ export default {
     text-align: center;
     background: inherit;
     z-index: 11;
+
+    // box-shadow: 0 0 10px 6px rgba(0, 0, 0, 0.5);
 
     .name {
       padding: 10px;
