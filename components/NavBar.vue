@@ -13,8 +13,8 @@
         :xs="{ span: 0, offset: 0 }"
         :sm="{ span: 12, offset: 0 }"
         :md="{ span: 12, offset: 0 }"
-        :lg="{ span: 6, offset: 5 }"
-        :xl="{ span: 6, offset: 6 }"
+        :lg="{ span: 8, offset: 6 }"
+        :xl="{ span: 10, offset: 8 }"
       >
         <span class="tab-item">
           <span
@@ -37,8 +37,8 @@
         :xs="{ span: 4, offset: 6 }"
         :sm="{ span: 3, offset: 2 }"
         :md="{ span: 4, offset: 2 }"
-        :lg="{ span: 3, offset: 2 }"
-        :xl="{ span: 3, offset: 2 }"
+        :lg="{ span: 4, offset: 0 }"
+        :xl="{ span: 2 }"
       >
         <el-input class="input" placeholder="查询点什么" v-model="keywords">
           <i
@@ -53,8 +53,8 @@
         :xs="{ span: 6, offset: 6 }"
         :sm="{ span: 2, offset: 3 }"
         :md="{ span: 2, offset: 2 }"
-        :lg="{ span: 2, offset: 2 }"
-        :xl="{ span: 2, offset: 0 }"
+        :lg="{ span: 3, offset: 0 }"
+        :xl="{ span: 4 }"
       >
         <el-tooltip
           class="item"
@@ -83,6 +83,14 @@
         </el-tooltip>
       </el-col>
     </el-row>
+    <div class="aa">
+      <a
+        href="https://cloud.tencent.com/act/cps/redirect?redirect=1048&cps_key=b6d2dab3dff091af2362650cf3cc33ee&from=console"
+        target="_blank"
+      >
+        <img src="https://i.loli.net/2019/10/22/xkK8YMr9BR5WnTj.jpg" alt="" />
+      </a>
+    </div>
   </div>
 </template>
 
@@ -160,22 +168,16 @@ export default {
     overflow: hidden;
     background: inherit;
   }
-  // -webkit-filter: blur(2px); /* Chrome, Opera */
-  // -moz-filter: blur(2px);
-  // -ms-filter: blur(2px);
-  // filter: blur(2px);
+
   .avatar {
     position: absolute;
-    left: 40%;
+    left: 38%;
+    margin: 0 auto;
     top: 20%;
-    /*transform: translate(-50%,-50%);*/
     width: 200px;
     height: 200px;
-    text-align: center;
     background: inherit;
     z-index: 11;
-
-    // box-shadow: 0 0 10px 6px rgba(0, 0, 0, 0.5);
 
     .name {
       padding: 10px;
@@ -227,5 +229,16 @@ span /deep/ .el-link--inner {
 }
 span /deep/ .el-link--inner:hover {
   color: black;
+}
+.aa {
+  position: fixed;
+  cursor: pointer;
+  right: 230px;
+  bottom: 0;
+  border: none;
+  width: 5%;
+  img {
+    border-radius: 10px;
+  }
 }
 </style>

@@ -66,9 +66,9 @@ export default {
 <style scoped lang="scss">
 .tags {
   padding-top: 20px;
-
+  width: 900px;
+  margin: 0 auto;
   .tag {
-    margin: 0 auto;
     color: white;
     border-radius: 100px;
     display: inline-block;
