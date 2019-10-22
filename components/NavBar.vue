@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="headers">
+      <img src="~assets/images/logo.jpg" />
       <div class="avatar">
         <el-avatar :size="150" :src="masterUserInfo.avatar" />
         <span class="name">{{ masterUserInfo.name }}</span>
@@ -135,18 +136,44 @@ export default {
 
 <style scoped lang="scss">
 .headers {
-  padding: 0;
-  margin: 0;
-  background-image: url('~assets/images/logo.jpg');
-  background-color: transparent;
   position: relative;
+  width: 120%;
+
+  // width: 100%;
+  // padding: 0;
+  // margin: 0;
+  // background-image: url('~assets/images/logo.jpg');
+  // background-color: transparent;
+  // position: relative;
   height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // padding: 1px;
+  // box-sizing: border-box;
+  overflow: hidden;
+
+  img {
+    z-index: 1;
+    width: 100%;
+  }
+  -webkit-filter: blur(5px); /* Chrome, Opera */
+  -moz-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+  overflow: hidden;
+  background: inherit;
 
   .avatar {
+    position: absolute;
+    left: 40%;
+    top: 20%;
+    /*transform: translate(-50%,-50%);*/
+    width: 200px;
+    height: 200px;
     text-align: center;
+    background: inherit;
+    z-index: 11;
 
     .name {
       padding: 10px;

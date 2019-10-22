@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <Tag
-      :style="{backgroundColor: randomColor()}"
+      :style="{ backgroundColor: randomColor() }"
       class="tag"
       :name="item.name"
       :count="item.postsTotal"
@@ -25,10 +25,15 @@ export default {
   },
   methods: {
     randomColor() {
-      return 'hsl(' +
-        Math.round(Math.random() * 360) + ',' +
-        Math.round(Math.random() * 100) + '%,' +
-        Math.round(Math.random() * 80) + '%)'
+      return (
+        'hsl(' +
+        Math.round(Math.random() * 360) +
+        ',' +
+        Math.round(Math.random() * 100) +
+        '%,' +
+        Math.round(Math.random() * 80) +
+        '%)'
+      )
     }
   },
   data() {
@@ -59,15 +64,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .tags {
-    padding-top: 20px;
+.tags {
+  padding-top: 20px;
 
-    .tag {
-      color: white;
-      border-radius: 100px;
-      display: inline-block;
-      margin: 12px;
-      padding: 12px;
-    }
+  .tag {
+    margin: 0 auto;
+    color: white;
+    border-radius: 100px;
+    display: inline-block;
+    margin: 12px;
+    padding: 12px;
   }
+}
 </style>
