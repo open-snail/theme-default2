@@ -16,7 +16,7 @@
         :sm="{ span: 12, offset: 0 }"
         :md="{ span: 12, offset: 0 }"
         :lg="{ span: 8, offset: 5 }"
-        :xl="{ span: 10, offset: 8 }"
+        :xl="{ span: 7, offset: 5 }"
       >
         <span class="tab-item">
           <span
@@ -40,7 +40,7 @@
         :sm="{ span: 3, offset: 2 }"
         :md="{ span: 4, offset: 2 }"
         :lg="{ span: 3 }"
-        :xl="{ span: 2 }"
+        :xl="{ span: 3 }"
       >
         <el-input class="input" placeholder="查询点什么" v-model="keywords">
           <i
