@@ -5,7 +5,7 @@
 
 之前上线的默认主题不少网友说不行，尤其是在seo方面，于是我决定用nux.js开发一个简单的主题。这个页面是有[Yancy](https://github.com/986244073)实现的。在这里也非常感谢这位小伙伴的贡献。这里是他的博客。[主题的源代码](https://github.com/byteblogs168/theme-default2)
 
-预览地址 [Yancy的博客](https://www.byteblogs.com/article/156)
+预览地址 [Yancy的博客](http://yancy.byteblogs.com/)
 
 # 主题界面
 ## 首页
@@ -33,19 +33,45 @@
 * [默认主题2](https://github.com/byteblogs168/theme-default2)
 
 
-## Build Setup
+## 安装nuxt
 
-``` bash
-# install dependencies
-$ npm run install
+[教程](https://www.byteblogs.com/article/38)
 
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
 ```
+## .nuxt 文件你需要在项目下面 执行下面 命令得到
+npm bulid
+
+## 后面直接就
+npm install
+
+## 安装 pm2
+###pm2简单介绍: pm2是nodejs的一个带有负载均衡功能的应用进程管理器的模块，类似有Supervisor，forever，用来进行进程管理
+npm install pm2 -g
+
+## 启动 
+pm2 start npm --name nuxt -- start
+
+## 停止
+pm2 stop all #停止PM2列表中所有的进程
+pm2 stop 0 #停止PM2列表中进程为0的进程
+
+## 日志
+pm2 logs
+```
+
+## 如何解决centos的nodejs npm版本的升级
+
+[教程](https://www.byteblogs.com/article/168)
+
+```yum remove nodejs```
+
+## 删除yum源
+cd 到yum源配置文件夹：```cd /etc/yum.repo.d``` ，删除以 node 开头的源; 清除 yum 缓存 yum clean all
+
+## 安装node
+```curl -sL https://rpm.nodesource.com/setup_10.x | bash -```
+
+```yum install -y nodejs```
+
+#3 更新 npm
+```npm install npm@latest -g``` 命令：npm -v 输出版本号就成功安装了。
