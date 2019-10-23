@@ -2,9 +2,9 @@
   <div>
     <div class="headers">
       <img src="~assets/images/logo.jpg" />
-      <div class="avatar">
+      <div class="avatar" style="text-align: center;">
         <el-avatar :size="150" :src="masterUserInfo.avatar" />
-        <span class="name">{{ masterUserInfo.name }}</span>
+        <span class="name" style="text-align: center;">{{ masterUserInfo.name }}</span>
       </div>
     </div>
     <el-row class="header-tab tabs">
@@ -65,7 +65,7 @@
           <i
             @click="friendlyClick"
             class="iconfont icongithub"
-            style="font-size: 28px;text-align: center"
+            style="font-size: 28px;text-align: center;margin-left: 15px;"
           ></i>
         </el-tooltip>
 
@@ -78,7 +78,7 @@
           <i
             @click="copyEmail"
             class="iconfont iconyouxiang"
-            style="font-size: 28px;text-align: center"
+            style="font-size: 28px;text-align: center;margin-left: 15px;"
           ></i>
         </el-tooltip>
       </el-col>
