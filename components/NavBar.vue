@@ -15,7 +15,7 @@
         :xs="{ span: 0, offset: 0 }"
         :sm="{ span: 12, offset: 0 }"
         :md="{ span: 12, offset: 0 }"
-        :lg="{ span: 8, offset: 6 }"
+        :lg="{ span: 8, offset: 5 }"
         :xl="{ span: 10, offset: 8 }"
       >
         <span class="tab-item">
@@ -39,7 +39,7 @@
         :xs="{ span: 4, offset: 6 }"
         :sm="{ span: 3, offset: 2 }"
         :md="{ span: 4, offset: 2 }"
-        :lg="{ span: 4, offset: 0 }"
+        :lg="{ span: 3 }"
         :xl="{ span: 2 }"
       >
         <el-input class="input" placeholder="查询点什么" v-model="keywords">
