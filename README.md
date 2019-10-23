@@ -75,3 +75,6 @@ cd 到yum源配置文件夹：```cd /etc/yum.repo.d``` ，删除以 node 开头�
 
 #3 更新 npm
 ```npm install npm@latest -g``` 命令：npm -v 输出版本号就成功安装了。
+
+## 有问题加入我们官方群
+* [加入我们的QQ群](https://shang.qq.com/wpa/qunwpa?idkey=e4098dabb3b751808044bdf58900ad733b983d7efbb5142c5485ececacf3c00d)
