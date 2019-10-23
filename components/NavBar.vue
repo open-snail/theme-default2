@@ -16,7 +16,7 @@
         :sm="{ span: 12, offset: 0 }"
         :md="{ span: 12, offset: 0 }"
         :lg="{ span: 8, offset: 5 }"
-        :xl="{ span: 7, offset: 5 }"
+        :xl="{ span: 6, offset: 6 }"
       >
         <span class="tab-item">
           <span
@@ -36,9 +36,9 @@
       </el-col>
       <!-- 2 -->
       <el-col
-        :xs="{ span: 4, offset: 6 }"
+        :xs="{ span: 3, offset: 6 }"
         :sm="{ span: 3, offset: 2 }"
-        :md="{ span: 4, offset: 2 }"
+        :md="{ span: 3, offset: 2 }"
         :lg="{ span: 3 }"
         :xl="{ span: 3 }"
       >
