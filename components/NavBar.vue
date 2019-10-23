@@ -4,7 +4,9 @@
       <img src="~assets/images/logo.jpg" />
       <div class="avatar" style="text-align: center;">
         <el-avatar :size="150" :src="masterUserInfo.avatar" />
-        <span class="name" style="text-align: center;">{{ masterUserInfo.name }}</span>
+        <span class="name" style="text-align: center;">{{
+          masterUserInfo.name
+        }}</span>
       </div>
     </div>
     <el-row class="header-tab tabs">
@@ -83,14 +85,6 @@
         </el-tooltip>
       </el-col>
     </el-row>
-    <div class="aa">
-      <a
-        href="https://cloud.tencent.com/act/cps/redirect?redirect=1048&cps_key=b6d2dab3dff091af2362650cf3cc33ee&from=console"
-        target="_blank"
-      >
-        <img src="https://i.loli.net/2019/10/22/xkK8YMr9BR5WnTj.jpg" alt="" />
-      </a>
-    </div>
   </div>
 </template>
 
@@ -229,16 +223,5 @@ span /deep/ .el-link--inner {
 }
 span /deep/ .el-link--inner:hover {
   color: black;
-}
-.aa {
-  position: fixed;
-  cursor: pointer;
-  right: 230px;
-  bottom: 0;
-  border: none;
-  width: 5%;
-  img {
-    border-radius: 10px;
-  }
 }
 </style>
