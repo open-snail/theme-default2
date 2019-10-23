@@ -139,25 +139,14 @@ export default {
 <style scoped lang="scss">
 .headers {
   position: relative;
-  width: 120%;
-
-  // width: 100%;
-  // padding: 0;
-  // margin: 0;
-  // background-image: url('~assets/images/logo.jpg');
-  // background-color: transparent;
-  // position: relative;
+  width: 100%;
   height: 300px;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // padding: 1px;
-  // box-sizing: border-box;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 
   img {
     z-index: 1;
-    width: 100%;
     filter: blur(5px);
     overflow: hidden;
     background: inherit;
@@ -165,7 +154,6 @@ export default {
 
   .avatar {
     position: absolute;
-    left: 38%;
     margin: 0 auto;
     top: 20%;
     width: 200px;
@@ -181,6 +169,7 @@ export default {
 }
 
 .header-tab {
+  z-index: 2;
   height: 50px;
   line-height: 50px;
   margin-top: -50px;
@@ -209,11 +198,6 @@ export default {
       .tab:hover {
         color: black;
       }
-    }
-
-    .active {
-      /*border-bottom: 4px solid black;*/
-      /*border-bottom-width: 5px;*/
     }
   }
 }
