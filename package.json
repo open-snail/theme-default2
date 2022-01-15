@@ -16,7 +16,7 @@
     "element-ui": "^2.4.11",
     "highlight.js": "^9.15.6",
     "js-cookie": "2.2.0",
-    "marked": "^0.7.0",
+    "marked": "^4.0.10",
     "nuxt": "^2.0.0",
     "reset.css": "^2.0.2"
   },
